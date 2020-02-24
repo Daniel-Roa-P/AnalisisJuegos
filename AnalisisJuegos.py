@@ -13,6 +13,8 @@ secretAccessToken = "HLD68hrW7pOcmmsCWd9EUr36lJwZmqXRhR08H5HPuhMdn"
 autenticacion = tweepy.OAuthHandler( apiKey , apiSecretKey )
 autenticacion.set_access_token( accessToken , secretAccessToken )
 
+promedios=[]
+labels = 'Stars Wars','Need for speed','Fifa','Madden','ApeX legends','Battlefield','The Sims','NBA' 
 
 def post_a_DataFrame(tweets):
     
@@ -37,7 +39,8 @@ likesStars.plot(figsize=(10, 4), color = 'b' )
 plt.title("Likes vs Fecha (Juegos de Star Wars)")
 plt.show()
 
-print('El promedio likes de los juegos de starwars: ' + str(st.mean(starWarsFiltrado['likes'])))
+promedios.append(int(st.mean(starWarsFiltrado['likes'])))
+print('El promedio likes de los juegos de starwars es: ' + str(promedios[0]) + ' likes')
 
 
 nfs = post_a_DataFrame(api.user_timeline(screen_name = "NeedforSpeed", count=150))
@@ -48,7 +51,8 @@ likesNfs.plot(figsize=(10, 4), color = 'g' )
 plt.title("Likes vs Fecha (Juegos de Need for speed)")
 plt.show()
 
-print('El promedio likes de los juegos de need for speed: ' + str(st.mean(nfsFiltrado['likes'])))
+promedios.append(int(st.mean(nfsFiltrado['likes'])))
+print('El promedio likes de los juegos de need for speed es: ' + str(promedios[1])+ ' likes')
 
 
 fifa = post_a_DataFrame(api.user_timeline(screen_name = "EASPORTSFIFA", count=150))
@@ -59,7 +63,8 @@ likesFifa.plot(figsize=(10, 4), color = 'r' )
 plt.title("Likes vs Fecha (Juegos de Fifa)")
 plt.show()
 
-print('El promedio likes de los juegos de fifa: ' + str(st.mean(fifaFiltrado['likes'])))
+promedios.append(int(st.mean(fifaFiltrado['likes'])))
+print('El promedio likes de los juegos de fifa es: ' + str(promedios[2])+ ' likes')
 
 
 maden = post_a_DataFrame(api.user_timeline(screen_name = "EAMaddenNFL", count=150))
@@ -70,7 +75,8 @@ likesMaden.plot(figsize=(10, 4), color = 'c' )
 plt.title("Likes vs Fecha (Juegos de Madden NFL)")
 plt.show()
 
-print('El promedio likes de los juegos de madden: ' + str(st.mean(madenFiltrado['likes'])))
+promedios.append(int(st.mean(madenFiltrado['likes'])))
+print('El promedio likes de los juegos de madden es: ' + str(promedios[3])+ ' likes')
 
 
 apex = post_a_DataFrame(api.user_timeline(screen_name = "PlayApex", count=150))
@@ -81,7 +87,8 @@ likesApex.plot(figsize=(10, 4), color = 'm' )
 plt.title("Likes vs Fecha (Apex Legends)")
 plt.show()
 
-print('El promedio likes de apex ' + str(st.mean(apexFiltrado['likes'])))
+promedios.append(int(st.mean(apexFiltrado['likes'])))
+print('El promedio likes de apex es:' + str(promedios[4])+ ' likes')
 
 
 battle = post_a_DataFrame(api.user_timeline(screen_name = "Battlefield", count=150))
@@ -92,7 +99,8 @@ likesBattle.plot(figsize=(10, 4), color = 'y' )
 plt.title("Likes vs Fecha (Juegos de Battlefield)")
 plt.show()
 
-print('El promedio likes de los juegos de Battlefield ' + str(st.mean(battleFiltrado['likes'])))
+promedios.append(int(st.mean(battleFiltrado['likes'])))
+print('El promedio likes de los juegos de Battlefield es:' + str(promedios[5])+ ' likes')
 
 
 sims = post_a_DataFrame(api.user_timeline(screen_name = "TheSims", count=150))
@@ -103,7 +111,8 @@ likesSims.plot(figsize=(10, 4), color = 'k' )
 plt.title("Likes vs Fecha (Juegos los Sims)")
 plt.show()
 
-print('El promedio likes de los juegos de The sims ' + str(st.mean(simsFiltrado['likes'])))
+promedios.append(int(st.mean(simsFiltrado['likes'])))
+print('El promedio likes de los juegos de The sims es: ' + str(promedios[6])+ ' likes')
 
 
 nba = post_a_DataFrame(api.user_timeline(screen_name = "EASPORTSNBA", count=150))
@@ -114,6 +123,12 @@ likesNba.plot(figsize=(10, 4), color = 'r' )
 plt.title("Likes vs Fecha (Juegos de Nba)")
 plt.show()
 
-print('El promedio likes de los juegos Nba ' + str(st.mean(nbaFiltrado['likes'])))
+promedios.append(int(st.mean(nbaFiltrado['likes'])))
+print('El promedio likes de los juegos Nba es: ' + str(promedios[7])+ ' likes')
 
+print('Grafica de pastel con los promedios de likes de cada juego es:')
 
+fig1, ax1 = plt.subplots()
+ax1.pie(promedios, labels=labels, autopct='%1.1f%%',shadow=True, startangle=90)
+ax1.axis('equal') 
+plt.show()
